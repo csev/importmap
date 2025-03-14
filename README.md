@@ -1,12 +1,13 @@
 # Web Components Demo
 
-A simple demonstration using Lit Elements with import maps for development and Vite for production builds.
+A simple demonstration using ES modules with import maps for development and esbuild for production builds.
 
 ## Project Structure
 
 - `index.html` - Main HTML file with import map configuration
 - `main.js` - JavaScript module with date formatting functionality
-- `tools/generate-package-json.js` - Tool to sync import map dependencies with package.json
+- `tools/generate_importmap.php` - PHP tool to sync import map from package.json
+- `tools/build.js` - esbuild production build script
 
 ## Development
 
@@ -14,71 +15,42 @@ This project can be run directly in the browser using import maps. No build step
 
 ### Running in Development
 
-You can use any local development server. For example:
-
-Using Python:
+Using PHP (automatically generates import map):
 ```bash
-python -m http.server 8000
+php -S localhost:8000
 ```
 
-Using Node.js (with `http-server`):
+Or using Python (with static import map):
 ```bash
-npx http-server
+python -m http.server 8000
 ```
 
 Then visit `http://localhost:8000` in your browser.
 
 ## Production Build
 
-For production, we use Vite to create optimized builds. This will:
+For production, we use esbuild to create optimized builds. This will:
 - Bundle all dependencies
 - Tree-shake unused code
 - Create optimized assets
 - Remove the need for import maps
 
-### Setting up Vite
-
-1. Install Node.js if you haven't already
-2. Initialize the project and install Vite:
-```bash
-npm init -y
-npm install --save-dev vite
-```
-
-3. Add these scripts to your package.json:
-```json
-{
-  "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview"
-  }
-}
-```
-
 ### Building for Production
 
-1. Create production build:
+1. Install dependencies:
+```bash
+npm install
+```
+
+2. Create production build:
 ```bash
 npm run build
 ```
-This will:
-- Automatically sync import map dependencies to package.json
-- Install any new dependencies
-- Create an optimized production build
 
-2. Serve the production build:
-
-Using Python:
+3. Serve the production build:
 ```bash
 cd dist
 python -m http.server 8000
-```
-
-Using Node.js (with `http-server`):
-```bash
-cd dist
-npx http-server
 ```
 
 Then visit `http://localhost:8000` to see the optimized production version.
@@ -88,9 +60,8 @@ Then visit `http://localhost:8000` to see the optimized production version.
 Development (via import maps):
 - Day.js v1.10.7 (from Skypack CDN)
 
-Production (handled by Vite):
-- Dependencies are automatically synced from import map
-- Bundled from npm packages
+Production (handled by esbuild):
+- Dependencies are bundled from npm packages
 - No runtime CDN dependencies
 - Optimized and minified output
 
@@ -102,6 +73,6 @@ Production (handled by Vite):
 ## Notes
 
 - Development uses import maps for direct in-browser module loading
-- Production builds use Vite for optimization
-- Dependencies are synced between import maps and package.json
+- Production builds use esbuild for optimization
+- PHP development server provides automatic import map generation
 - Tree-shaking ensures minimal bundle size 
