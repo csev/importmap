@@ -9,5 +9,9 @@ export default defineConfig({
         main: 'index.html'
       }
     }
+  },
+  resolve: {
+    // Help Vite find the dependencies
+    mainFields: ['module', 'browser', 'main']
   }
 }); 

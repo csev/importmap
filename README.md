@@ -4,9 +4,10 @@ A simple demonstration using Lit Elements with import maps for development and V
 
 ## Project Structure
 
-- `index.htm` - Main HTML file with import map configuration
+- `index.html` - Main HTML file with import map configuration
 - `components/my-element.js` - Lit Element component
 - `main.js` - JavaScript module with date formatting functionality
+- `tools/generate-package-json.js` - Tool to sync import map dependencies with package.json
 
 ## Development
 
@@ -36,13 +37,32 @@ For production, we use Vite to create optimized builds. This will:
 - Create optimized assets
 - Remove the need for import maps
 
+### Syncing Dependencies
+
+Before building for production, you need to sync your import map dependencies with package.json:
+
+1. Install the HTML parser:
+```bash
+npm install node-html-parser
+```
+
+2. Run the sync tool:
+```bash
+node tools/generate-package-json.js
+```
+
+This tool:
+- Reads the import map from index.html
+- Extracts package versions from CDN URLs
+- Updates package.json dependencies
+- Preserves existing package.json content
+
 ### Setting up Vite
 
 1. Install Node.js if you haven't already
-2. Initialize the project and install Vite:
+2. After syncing dependencies, install them:
 ```bash
-npm init -y
-npm install --save-dev vite
+npm install
 ```
 
 3. Add these scripts to your package.json:
@@ -77,7 +97,8 @@ Development (via import maps):
 - Day.js v1.10.7 (from Skypack CDN)
 
 Production (handled by Vite):
-- Dependencies are bundled from the same versions specified in the import map
+- Dependencies are automatically synced from import map
+- Bundled from npm packages
 - No runtime CDN dependencies
 - Optimized and minified output
 
@@ -90,6 +111,7 @@ Production (handled by Vite):
 
 - Development uses import maps for direct in-browser module loading
 - Production builds use Vite for optimization
+- Dependencies are synced between import maps and package.json
 - No framework dependencies (Vue, React, etc.)
 - Web Components built with Lit
 - Tree-shaking ensures minimal bundle size 

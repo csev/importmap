@@ -1,7 +1,31 @@
 {
+  "name": "web-components-demo",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview"
+  },
+  "description": "A simple demonstration using Lit Elements with import maps for development and Vite for production builds.",
+  "main": "main.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/csev/importmap.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/csev/importmap/issues"
+  },
+  "homepage": "https://github.com/csev/importmap#readme",
+  "devDependencies": {
+    "vite": "^5.4.14"
+  },
+  "dependencies": {
+    "node-html-parser": "^7.0.1",
+    "dayjs": "^1.10.7"
   }
-} 
+}
