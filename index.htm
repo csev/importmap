@@ -3,21 +3,16 @@
         <script type="importmap">
         {
             "imports": {
-                "dayjs": "https://cdn.skypack.dev/dayjs@1.10.7"
+                "dayjs": "https://cdn.skypack.dev/dayjs@1.10.7",
+                "lit": "https://cdn.skypack.dev/lit@2.8.0",
+                "lit/decorators.js": "https://cdn.skypack.dev/lit@2.8.0/decorators.js"
             }
         }
         </script>
     </head>
     <body>
         <h1>Hello World</h1>
-        <script type="module">
-            import { formatDate } from './main.js';
-            
-            // Example usage:
-            console.log(formatDate('2019-01-25'));
-            
-            // You could also use it with DOM elements
-            document.querySelector('h1').textContent = formatDate(new Date());
-        </script>
+        <my-element></my-element>
+        <script type="module" src="./components/my-element.js"></script>
     </body>
 </html>
