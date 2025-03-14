@@ -85,9 +85,29 @@ npm run build
 This will:
 - Automatically sync import map dependencies to package.json
 - Install any new dependencies
-- Create an optimized production build
+- Create an optimized production build in the `dist/` directory
 
-The production build will be in the `dist/` directory.
+2. Serve the production build:
+
+Using Python:
+```bash
+cd dist
+python -m http.server 8000
+```
+
+Using Node.js (with `http-server`):
+```bash
+cd dist
+npx http-server
+```
+
+Then visit `http://localhost:8000` in your browser to see the optimized production version.
+
+Note: The production build:
+- Has all dependencies bundled (no CDN usage)
+- Removes the import map (not needed in production)
+- Is optimized and minified
+- Should be served from the `dist` directory
 
 ## Dependencies
 
