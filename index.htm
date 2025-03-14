@@ -1,0 +1,23 @@
+<html>
+    <head>
+        <script type="importmap">
+        {
+            "imports": {
+                "dayjs": "https://cdn.skypack.dev/dayjs@1.10.7"
+            }
+        }
+        </script>
+    </head>
+    <body>
+        <h1>Hello World</h1>
+        <script type="module">
+            import { formatDate } from './main.js';
+            
+            // Example usage:
+            console.log(formatDate('2019-01-25'));
+            
+            // You could also use it with DOM elements
+            document.querySelector('h1').textContent = formatDate(new Date());
+        </script>
+    </body>
+</html>
