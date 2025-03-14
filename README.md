@@ -5,7 +5,6 @@ A simple demonstration using Lit Elements with import maps for development and V
 ## Project Structure
 
 - `index.html` - Main HTML file with import map configuration
-- `components/my-element.js` - Lit Element component
 - `main.js` - JavaScript module with date formatting functionality
 - `tools/generate-package-json.js` - Tool to sync import map dependencies with package.json
 
@@ -37,32 +36,13 @@ For production, we use Vite to create optimized builds. This will:
 - Create optimized assets
 - Remove the need for import maps
 
-### Syncing Dependencies
-
-Before building for production, you need to sync your import map dependencies with package.json:
-
-1. Install the HTML parser:
-```bash
-npm install node-html-parser
-```
-
-2. Run the sync tool:
-```bash
-node tools/generate-package-json.js
-```
-
-This tool:
-- Reads the import map from index.html
-- Extracts package versions from CDN URLs
-- Updates package.json dependencies
-- Preserves existing package.json content
-
 ### Setting up Vite
 
 1. Install Node.js if you haven't already
-2. After syncing dependencies, install them:
+2. Initialize the project and install Vite:
 ```bash
-npm install
+npm init -y
+npm install --save-dev vite
 ```
 
 3. Add these scripts to your package.json:
@@ -85,7 +65,7 @@ npm run build
 This will:
 - Automatically sync import map dependencies to package.json
 - Install any new dependencies
-- Create an optimized production build in the `dist/` directory
+- Create an optimized production build
 
 2. Serve the production build:
 
@@ -101,18 +81,11 @@ cd dist
 npx http-server
 ```
 
-Then visit `http://localhost:8000` in your browser to see the optimized production version.
-
-Note: The production build:
-- Has all dependencies bundled (no CDN usage)
-- Removes the import map (not needed in production)
-- Is optimized and minified
-- Should be served from the `dist` directory
+Then visit `http://localhost:8000` to see the optimized production version.
 
 ## Dependencies
 
 Development (via import maps):
-- Lit v2.8.0 (from Skypack CDN)
 - Day.js v1.10.7 (from Skypack CDN)
 
 Production (handled by Vite):
@@ -131,6 +104,4 @@ Production (handled by Vite):
 - Development uses import maps for direct in-browser module loading
 - Production builds use Vite for optimization
 - Dependencies are synced between import maps and package.json
-- No framework dependencies (Vue, React, etc.)
-- Web Components built with Lit
 - Tree-shaking ensures minimal bundle size 
