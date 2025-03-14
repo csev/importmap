@@ -82,11 +82,10 @@ npm install
 ```bash
 npm run build
 ```
-
-2. Preview the production build:
-```bash
-npm run preview
-```
+This will:
+- Automatically sync import map dependencies to package.json
+- Install any new dependencies
+- Create an optimized production build
 
 The production build will be in the `dist/` directory.
 
